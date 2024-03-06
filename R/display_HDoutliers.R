@@ -34,7 +34,7 @@ display_HDoutliers <- function(data, out) {
   if (d == 1) {
     data$index <- rep(0, n)
     out_display <- ggplot(data) +
-      geom_point(aes_string(x = data[, 1], y = data[, 3], colour = type, shape = type)) +
+      geom_point(aes_string(x = data[, 1], y = data[, 3], colour = data$type, shape = data$type)) +
       scale_colour_manual(name = "Type", values = c("outlier" = "#00AD9A", "typical" = "#E16A86")) +
       scale_shape_manual(name = "Type", values = c("outlier" = 17, "typical" = 20)) +
       xlab("Value") +
@@ -45,7 +45,7 @@ display_HDoutliers <- function(data, out) {
     out_display
   } else if (d == 2) {
     out_display <- ggplot(data) +
-      geom_point(aes_string(x = data[, 1], y = data[, 2], colour = type)) +
+      geom_point(aes_string(x = data[, 1], y = data[, 2], colour = data$type)) +
       scale_colour_manual(name = "Type", values = c("outlier" = "#00AD9A", "typical" = "#E16A86")) +
       xlab("Variable 1") +
       ylab("Variable 2") +
@@ -59,7 +59,7 @@ display_HDoutliers <- function(data, out) {
     data$PC1 <- rpc$scores[, 1]
     data$PC2 <- rpc$scores[, 2]
     out_display <- ggplot(data) +
-      geom_point(aes_string(x = "PC1", y = "PC2", colour = type)) +
+      geom_point(aes_string(x = "PC1", y = "PC2", colour = data$type)) +
       scale_colour_manual(name = "Type", values = c("outlier" = "#00AD9A", "typical" = "#E16A86")) +
       xlab("PC 1") +
       ylab("PC 2") +
