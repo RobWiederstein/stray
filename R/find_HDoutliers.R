@@ -69,7 +69,7 @@ find_HDoutliers <- function(data, alpha = 0.01, k = 10,
   type <- as.factor(ifelse(1:r %in% outliers,
     "outlier", "typical"
   ))
-  return(list(outliers = outliers, out_scores = out$out_scores, type = type))
+  return(data.frame(out_scores = out$out_scores, type = type))
 }
 
 
