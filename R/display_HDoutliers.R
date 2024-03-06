@@ -29,27 +29,29 @@ display_HDoutliers <- function(data, out) {
   data <- as.data.frame(data)
   d <- ncol(data)
   n <- nrow(data)
-  data$outcon <- out$type
+  data <- data.frame(cbind(data, out))
 
   if (d == 1) {
     data$index <- rep(0, n)
     out_display <- ggplot(data) +
-      geom_point(aes_string(x = data[, 1], y = data[, 3], colour = "outcon", shape = "outcon")) +
+      geom_point(aes_string(x = data[, 1], y = data[, 3], colour = type, shape = type)) +
       scale_colour_manual(name = "Type", values = c("outlier" = "#00AD9A", "typical" = "#E16A86")) +
       scale_shape_manual(name = "Type", values = c("outlier" = 17, "typical" = 20)) +
       xlab("Value") +
       ylab("") +
-      theme(axis.text.y = element_blank(), axis.ticks.y = element_blank()) +
-      theme_minimal()
+      theme_minimal() +
+      theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
+
     out_display
   } else if (d == 2) {
     out_display <- ggplot(data) +
-      geom_point(aes_string(x = data[, 1], y = data[, 2], colour = "outcon")) +
+      geom_point(aes_string(x = data[, 1], y = data[, 2], colour = type)) +
       scale_colour_manual(name = "Type", values = c("outlier" = "#00AD9A", "typical" = "#E16A86")) +
       xlab("Variable 1") +
       ylab("Variable 2") +
+      theme_minimal() +
       theme(aspect.ratio = 1) +
-      theme_minimal()
+
     out_display
   } else if (d > 2)
   {
@@ -57,12 +59,13 @@ display_HDoutliers <- function(data, out) {
     data$PC1 <- rpc$scores[, 1]
     data$PC2 <- rpc$scores[, 2]
     out_display <- ggplot(data) +
-      geom_point(aes_string(x = "PC1", y = "PC2", colour = "outcon")) +
+      geom_point(aes_string(x = "PC1", y = "PC2", colour = type)) +
       scale_colour_manual(name = "Type", values = c("outlier" = "#00AD9A", "typical" = "#E16A86")) +
       xlab("PC 1") +
       ylab("PC 2") +
-      theme(aspect.ratio = 1) +
-      theme_minimal()
+      theme_minimal() +
+      theme(aspect.ratio = 1)
+
     out_display
 
   }
