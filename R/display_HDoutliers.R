@@ -50,7 +50,7 @@ display_HDoutliers <- function(data, out) {
       xlab("Variable 1") +
       ylab("Variable 2") +
       theme_minimal() +
-      theme(aspect.ratio = 1) +
+      theme(aspect.ratio = 1)
 
     out_display
   } else if (d > 2)
